@@ -1,13 +1,13 @@
-# Poznámky k lekci Python Data z 20. 10. (web scraping)
+# Poznámky k lekci Python pro data z 20. 10. (web scraping)
 
 Ahoj,
-omlouvám se, že to tak trvalo, ale konečně jsem se dostal k sepsání slíbených poznámek.
+omlouvám se, že to tak trvalo, ale konečně jsem se dostal k sepsání slíbených poznámek.
 
-## Vzorové řešení [úlohy č. 2](https://kodim.cz/kurzy/python-data-1/ziskavani-dat/webscraping/webscraping#excs%3Escraping-kodim.cz) z kodim.cz
+## Vzorové řešení [úlohy č. 2](https://kodim.cz/kurzy/python-data-1/ziskavani-dat/webscraping/webscraping#excs%3Escraping-kodim.cz) z kodim.cz
 
 ### Zadání
 
-Napište program, který vypíše na výstup všechny povinné a nepovinné domácí úložky z lekce První programy spolu s jejich obtížností.
+Napište program, který vypíše na výstup všechny povinné a nepovinné domácí úložky z lekce První programy spolu s jejich obtížností.
 
 ### Jdeme na to! 💪
 
@@ -15,7 +15,7 @@ Na stránce v dolní části vidím bloky s jednotlivými úlohami, v každém b
 
 ### Nalezení správných CSS selektorů
 
-Klikám pravým tlačítkem na jeden z nadpisů a vyberu `Prozkoumat prvek`, `Inspect element` nebo podobně znějící volbu. Všimnu si, že ačkoli jsem kliknul na nadpis (`<h3>`), ve skutečnosti se dívám na vlastnosti v něm vnořeného odkazu (`<a>`). Taky si všimnu, že pokud budu chtít pracovat s nadpisem, musím si dát pozor na další nadpisy na stránce. Nadpis místo odkazu volím proto, že název jeho třídy je kratší. 😇 Můj vybraný selektor pro výběr nadpisů je tedy `h3.exercise-assign__title` (element H3 třídy exercise-assign__title). Obdobně postupuji pro získání selektoru pro obtížnost: `div.demand-text`.
+Klikám pravým tlačítkem na jeden z nadpisů a vyberu `Prozkoumat prvek`, `Inspect element` nebo podobně znějící volbu. Všimnu si, že ačkoli jsem kliknul na nadpis (`<h3>`), ve skutečnosti se dívám na vlastnosti v něm vnořeného odkazu (`<a>`). Taky si všimnu, že pokud budu chtít pracovat s nadpisem, musím si dát pozor na další nadpisy na stránce. Nadpis místo odkazu volím proto, že název jeho třídy je kratší. 😇 Můj vybraný selektor pro výběr nadpisů je tedy `h3.exercise-assign__title` (element H3 třídy exercise-assign__title). Obdobně postupuji pro získání selektoru pro obtížnost: `div.demand-text`.
 
 <img src="web_scraping.png" width="640">
 
@@ -78,7 +78,7 @@ while j < len(nadpisy):  # dokud je `j` menší než je délka seznamu `nadpisy`
 
 #### Pomocí čítače podruhé ♾️
 
-Tento další způsob je hodně podobný předchozímu. Liší se v tom, že si ukážeme, jak udělat cyklus `while` nekonečný a jak ho pak nakonec přece jen ukončit. V tomto případě jsme tím jen rozepsali kód na více řádků, může se vám ale hodit vědět, že tato možnost existuje, například pokud chcete cyklus přerušovat při splnění různých podmínek na více místech kódu. Navíc se díky tomu seznámíte s klíčovým slovek `break`, které prakticky ve všech běžných programovacích jazycích slouží k přerušování cyklů (včetně cyklu `for`).
+Tento další způsob je hodně podobný předchozímu. Liší se v tom, že si ukážeme, jak udělat cyklus `while` nekonečný a jak ho pak nakonec přece jen ukončit. V tomto případě jsme tím jen rozepsali kód na více řádků, může se vám ale hodit vědět, že tato možnost existuje, například pokud chcete cyklus přerušovat při splnění různých podmínek na více místech kódu. Navíc se díky tomu seznámíte s klíčovým slovek `break`, které prakticky ve všech běžných programovacích jazycích slouží k přerušování cyklů (včetně cyklu `for`).
 
 ```py
 j = 0  # pomocná proměnná, kterou si inicializujeme na 0
@@ -91,11 +91,11 @@ while True:  # následující blok prováděj, dokud platí podmínka `True`, tz
 
 #### Pomocí zipu 🤐
 
-Tak, a teď poslední způsob, který mě ve skutečnosti napadl jako první, protože je nejvíc „pythonic“ a nejvíc sexy. Použijeme interní metodu Pythonu nazvanou `[zip](https://docs.python.org/3/library/functions.html?highlight=zip#zip)`, která stejně jako obyčejné zdrhovadlo spojuje dva seznamy pěkně zoubek po zoubku, vždy dva odpovídající zoubky k sobě. 🙂 
+Tak, a teď poslední způsob, který mě ve skutečnosti napadl jako první, protože je nejvíc „pythonic“ a nejvíc sexy. 😍 Použijeme interní metodu Pythonu nazvanou [`zip`](https://docs.python.org/3/library/functions.html?highlight=zip#zip), která stejně jako obyčejné zdrhovadlo spojuje dva seznamy pěkně zoubek po zoubku, vždy dva odpovídající zoubky k sobě. 🙂
 
 ```py
 for nadpis, obtiznost in zip(nadpisy, obtiznosti):
     print(f"{nadpis} 👉 {obtiznost}")
 ```
 
-Jak vidíte, v tomto případě nemusím řešit žádné indexy, jednoduše si prvky z prvního seznamu `nadpisy` uložím do proměnné `nadpis` a prvky ze seznamu `obtiznosti` do proměnné `obtiznost`. Metoda `zip` totiž vrací dvojice (trojice, čtveřice atd. podle toho, kolik seznamů jí předám, zkrátka datový typ `tuple`) a pomocí čárky si tyto dvojice rozbalím (v angličtině se pro tento úkon používá sloveso „unpack“) do proměnných, které si pojmenuji, jak sám chci.
+Jak vidíte, v tomto případě nemusím řešit žádné indexy, jednoduše si prvky z prvního seznamu `nadpisy` uložím do proměnné `nadpis` a prvky ze seznamu `obtiznosti` do proměnné `obtiznost`. Metoda `zip` totiž vrací dvojice (trojice, čtveřice atd. podle toho, kolik seznamů jí předám, zkrátka datový typ `tuple`) a pomocí čárky si tyto dvojice rozbalím (v angličtině se pro tento úkon používá sloveso „unpack“) do proměnných, které si pojmenuji, jak sám chci.
